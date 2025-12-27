@@ -1,0 +1,6 @@
+Filter by: 
+  Agency -> All
+  Award Type -> Financial Assistance
+  Fiscal Year -> 2019 through 2024
+
+https://www.usaspending.gov/download_center/award_data_archive
