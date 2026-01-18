@@ -101,11 +101,8 @@ A screening metric that summarizes audit oversight signals into interpretable ti
 
 ## Repository Structure
 
-```text
-├── deliverables/          # Dashboard, slides, video, report
-├── data/analysis_core/    # Merged datasets & dictionaries
-├── pipeline/alteryx/      # Data cleaning workflows
-├── docs/                 # Competi
+
+## Second readme 
 
 # Fiscal Patriots | AuditsMadeSimple (AGA Datathon 2026)
 
