@@ -8,6 +8,20 @@
 
 ---
 
+## Key Findings
+
+**Scale of Federal Funding**
+- **$8.58 trillion** in federal financial assistance distributed (FY2019–2024)
+- **Top 10 states** received 50.9% of all federal grants
+- **California alone** received $1.05 trillion (12% of total)
+- **HHS and USDA** account for 67% of all federal assistance
+
+**What the Audits Reveal**
+- **57,448 entities** required to submit Single Audits (FY2016–2024)
+- **16,300+ entities** had at least one audit finding
+- **$1.09 trillion** in funding went to entities with repeat audit findings
+- **38,000 SAM-excluded entities** with UEI available for cross-referencing
+
 ## Why This Exists
 
 Federal funding data is large, fragmented, and hard to interpret quickly. Audit oversight data is even harder because it uses specialized terminology and the impact is not always obvious. Our goal is to make these systems approachable without oversimplifying the responsibility required to interpret oversight signals.
