@@ -38,6 +38,15 @@ Fiscal Patriot Dashboard integrates USAspending, FAC, and SAM data to help citiz
 
 ---
 
+## Python Libraries
+
+| Library | Purpose |
+|---------|---------|
+| `scikit-learn` | HistGradientBoostingClassifier, model evaluation metrics (ROC-AUC, PR-AUC), permutation importance |
+| `pandas` | Data cleaning, feature engineering, entity-year aggregation |
+| `matplotlib` | Feature importance visualization |
+
+---
 
 ## Key Findings
 
