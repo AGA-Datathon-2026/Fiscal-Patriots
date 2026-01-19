@@ -1,0 +1,206 @@
+# Fiscal Patriots
+
+**AuditsMadeSimple • AGA Datathon 2026**
+
+> A public-facing educational platform helping citizens explore federal financial assistance alongside audit oversight signals.
+
+🌐 **Live Website:** https://gmufiscalpatriots.bytechisel.com
+
+---
+
+## Why This Exists
+
+Federal funding data is large, fragmented, and hard to interpret quickly. Audit oversight data is even harder because it uses specialized terminology and the impact is not always obvious. Our goal is to make these systems approachable without oversimplifying the responsibility required to interpret oversight signals.
+
+**This project helps users:**
+- Explore funding patterns by geography and time
+- Learn audit terminology with plain-language definitions
+- Use a screening signal (Audit Health Score) to identify entities that may merit a closer look
+- Follow guided examples (case studies and next steps) to investigate responsibly
+
+---
+
+## What We Built
+
+### 1) Interactive Exploration (Tableau)
+Dashboards that highlight:
+- Funding distribution across states
+- Funding trends over time
+- Major funding sources by federal agency
+- Higher-risk entities with funding context
+
+### 2) Financial Literacy Glossary
+A glossary translating common audit and spending terms into short, usable definitions.
+
+### 3) Dataset Guide
+Plain descriptions of USAspending, FAC, and SAM: what each tracks, what each misses, and how to use them responsibly.
+
+### 4) Guided Engagement (Case Studies + What’s Next)
+Short walkthroughs and a checklist-style “What’s next?” page that keeps visitors engaged after their first chart.
+
+### 5) Audit Health Score (Screening Signal)
+A simple, interpretable 0–100 score designed to help users prioritize attention without claiming wrongdoing.
+
+---
+
+## Integrated Data Sources
+
+We connect official public sources using **UEI (Unique Entity Identifier)** whenever possible.
+
+| Source | What It Tracks |
+|--------|-----------------|
+| **USAspending.gov** | Federal spending and award transactions: who received funds, how much, and from which agency |
+| **FAC.gov** | Single Audit submissions for non-federal entities expending $750K+ in federal awards |
+| **SAM.gov** | Governmentwide exclusions: debarments, suspensions, and other exclusion actions |
+
+---
+
+## Repo Structure (Main Branch)
+deliverables/ Submission artifacts (dashboards, slides, report, video)
+webapp/ Website source (HTML pages + assets)
+data/ Clean outputs (CSV + Hyper) organized by domain
+pipeline/ Alteryx workflows + pipeline notes
+docs/ Data dictionaries + appendix hubs + team/competition docs
+assets/ Repo visuals used in README/docs
+
+---
+
+## Screenshot Gallery (Everything in-repo)
+
+This section is intentionally exhaustive so every screenshot in the repo has a place to render in the README.
+
+### Repo visuals
+
+![Dashboard overview](assets/dashboard.png)
+![Pipeline overview](assets/pipeline.png)
+
+### Competition reference
+
+![Allowable Data Sources](docs/competition/Allowable%20Data%20Sources.png)
+
+---
+
+## Methodology Screenshots (Alteryx)
+
+These live in:
+`docs/appendix_hubs/methodology/screenshots/alteryx/`
+
+**USAspending transformations**
+- Transaction-level exports transformed into recipient-level summaries by fiscal year (FY2019–FY2024), plus all-years rollups.
+
+![USAspending All Years](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_All_Years.png)
+![USAspending FY2023](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_FY2023.png)
+![USAspending FY2024](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_FY2024.png)
+
+**FAC master build**
+- FAC tables joined and aggregated to entity level (`auditee_uei`) to preserve audit flags, finding counts, and federal expenditures.
+
+![FAC Master Clean](docs/appendix_hubs/methodology/screenshots/alteryx/FAC%20Master%20Clean.png)
+
+**Audit Health Score construction**
+- Risk signals combined into Risk Points, then converted into a 0–100 Audit Health Score.
+
+![FAC Master With Risk Score](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_Master_With_Risk_Score.png)
+
+**Merges and enrichment**
+- FAC audit context joined to USAspending assistance records on UEI (and fiscal year where applicable).
+
+![FAC USAspending Merged](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_USAspending_Merged.png)
+![SAM FAC Merged](docs/appendix_hubs/methodology/screenshots/alteryx/SAM_FAC_Merged.png)
+
+**SAM exclusions**
+- Exclusions split by UEI availability and parsed to support duration and “active vs historical” analysis.
+
+![SAM Exclusion Cleaning](docs/appendix_hubs/methodology/screenshots/alteryx/SAM_Exclusion_Cleaning.png)
+
+**ML training dataset build**
+- Consecutive fiscal years joined on UEI to use prior-year audit signals as predictors and next-year findings as a target.
+
+![FAC USAspending ML Training](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_USAspending_ML_Training.png)
+
+---
+
+## Methodology Screenshots (Tableau)
+
+These live in:
+`docs/appendix_hubs/methodology/screenshots/tableau/`
+
+![Bar - Top 10 States Receive 50.9% of All Federal Grants](docs/appendix_hubs/methodology/screenshots/tableau/Bar%20-%20Top%2010%20States%20Receive%2050.9%25%20of%20All%20Federal%20Grants.png)
+![Cumulative Federal Funding (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Cumulative%20Federal%20Funding%20%28FY2019-2024%29.png)
+![Federal Funding (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Federal%20Funding%20%28FY2019-2024%29.png)
+![Federal Funding by Top 5 States (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Federal%20Funding%20by%20Top%205%20States%20%28FY2019-2024%29.png)
+![Findings Per $1M in Federal Spending by State](docs/appendix_hubs/methodology/screenshots/tableau/Findings%20Per%20%241M%20in%20Federal%20Spending%20by%20State.png)
+![Map - Material Weakness by State](docs/appendix_hubs/methodology/screenshots/tableau/Map%20-%20Material%20Weakness%20by%20State.png)
+![Map - Material Weakness Rate by State](docs/appendix_hubs/methodology/screenshots/tableau/Map%20-%20Material%20Weakness%20Rate%20by%20State.png)
+![Risk vs Protection Red Tier Shows Worst Combination](docs/appendix_hubs/methodology/screenshots/tableau/Risk%20vs%20Protection%20Red%20Tier%20Shows%20Worst%20Combination.png)
+
+---
+
+## Audit Health Score
+
+A 0–100 screening signal designed for interpretability and responsible prioritization.
+
+### Definition
+
+Audit Health Score = 100 − Risk Points (capped to keep score in 0–100 range)
+
+
+### Tiering
+
+| Tier | Score | Interpretation |
+|------|-------|----------------|
+| 🟢 **Green** | 80–100 | Fewer oversight signals — continue standard validation |
+| 🟡 **Yellow** | 60–79 | Moderate signals — review patterns year-over-year |
+| 🔴 **Red** | 0–59 | Highest oversight signals — prioritize for deeper review |
+
+> ⚠️ **Important:** This score is a prioritization aid, not a verdict. It does not prove fraud, waste, or abuse.
+
+Scoring documentation:
+- `docs/appendix_hubs/scoring/score_formula_and_tiers.md`
+- `docs/appendix_hubs/scoring/variable_definitions.md`
+- `docs/appendix_hubs/scoring/weighting_rationale.md`
+
+---
+
+## How to Explore the Project
+
+1. Visit the live site: https://gmufiscalpatriots.bytechisel.com  
+2. Open the Tableau dashboards (linked from the site)
+3. Read the glossary to understand audit terminology
+4. Use “What’s next?” to follow guided questions and case studies
+
+---
+
+## Tools & Technologies
+
+| Category | Tools |
+|----------|-------|
+| Data Processing | Alteryx, Python |
+| Visualization | Tableau Public |
+| Machine Learning | scikit-learn |
+| Website | HTML, CSS, AWS |
+
+---
+
+## Team (Fiscal Patriots)
+
+| Name | Role |
+|------|------|
+| Khaled Alkurd | Team Lead |
+| Pranavi Doodala | Project Manager |
+| Mariam Debas | Visualization Lead |
+| Nikita Chandrasing | Product Manager |
+| Andy Yaro | Product Developer |
+
+---
+
+## Disclaimer
+
+This project is for educational and public understanding purposes. Audit and exclusion signals require context. The presence of a finding or a higher-risk tier is not proof of wrongdoing. Always validate conclusions using primary documentation, program context, and appropriate investigative standards.
+
+---
+
+<p align="center">
+<b>Fiscal Patriots</b> • AuditsMadeSimple • AGA Datathon 2026<br>
+George Mason University • Costello College of Business
+</p>
