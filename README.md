@@ -22,7 +22,19 @@
 
 ## Abstract
 
-Fiscal Patriot Dashboard is a public-facing educational platform that helps citizens explore $8.58 trillion in federal financial assistance alongside audit oversight signals. We integrated USAspending, FAC, and SAM data to create the Audit Health Score — a 0–100 screening tool that identified $1.09 trillion in funding to entities with repeat audit findings. The platform includes interactive Tableau dashboards, a financial literacy glossary, and guided case studies to make government accountability accessible.
+Fiscal Patriot Dashboard integrates USAspending, FAC, and SAM data to help citizens explore $8.58 trillion in federal financial assistance alongside audit oversight signals. Our Audit Health Score identified $1.09 trillion flowing to repeatedly flagged entities, with interactive dashboards and a glossary making government accountability accessible to non-technical users.
+
+---
+
+## Development Tools
+
+| Category | Tools |
+|----------|-------|
+| Data Processing | Alteryx, Python |
+| Visualization | Tableau Public |
+| Machine Learning | scikit-learn |
+| Website | HTML, CSS, AWS |
+| AI Assistance | Claude, Google Gemini |
 
 ---
 
