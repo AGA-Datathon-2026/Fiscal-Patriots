@@ -125,6 +125,12 @@ Audit Health Score = 100 − Risk Points (capped to keep score in 0-100 range)
 
 > ⚠️ **Important:** This score is a prioritization aid, not a verdict. It does not prove fraud, waste, or abuse.
 
+FAC Master with Risk Score: 
+The Audit Health Score was calculated for each entity using weighted risk factors including going concern (25 pts), material weakness (20 pts), repeat findings (15 pts), and significant deficiencies (10 pts), with mitigating factors applied. Entities were tiered into Red (high risk), Yellow (moderate), and Green (low risk) categories to support dashboard visualizations and funding analysis.
+
+<img width="2623" height="1127" alt="FAC_Master_With_Risk_Score" src="https://github.com/user-attachments/assets/47a7b1ad-5e04-417f-858c-ccc0d08ac0f1" />
+
+
 ---
 
 ## Predictive Modeling Prototype
