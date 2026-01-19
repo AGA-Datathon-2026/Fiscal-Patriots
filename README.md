@@ -55,24 +55,6 @@ We connect official public sources using UEI (Unique Entity Identifier) whenever
 
 ---
 
-## Key Findings from Data Integration
-
-Cross-system analysis revealed oversight gaps invisible in any single dataset:
-
-### FAC + SAM Merge
-**Prince Hall Village Charitable Trust** — Excluded by HUD in 1997, still receiving HUD funds in 2022.
-
-🔴 **Gap: 25+ years** • Intra-agency failure: the same agency that excluded them continued funding them.
-
-### SAM + USAspending Merge
-**Amerihost Services, LLC** — Excluded by EPA in 2021, received $759K across 15 HUD awards through 2024.
-
-🔴 **Gap: 3+ years** • Cross-agency failure: exclusion data doesn't flow between agencies.
-
-> ✅ **Recommendation: Automated pre-payment exclusion verification**
-
----
-
 ## Audit Health Score
 
 A 0-100 screening signal designed for interpretability and responsible prioritization.
