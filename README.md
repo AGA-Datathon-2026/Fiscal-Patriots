@@ -22,6 +22,8 @@
 - **$1.09 trillion** in funding went to entities with repeat audit findings
 - **38,000 SAM-excluded entities** with UEI available for cross-referencing
 
+---
+
 ## Why This Exists
 
 Federal funding data is large, fragmented, and hard to interpret quickly. Audit oversight data is even harder because it uses specialized terminology and the impact is not always obvious. Our goal is to make these systems approachable without oversimplifying the responsibility required to interpret oversight signals.
@@ -162,8 +164,7 @@ A 0–100 screening signal designed for interpretability and responsible priorit
 
 ### Definition
 
-Audit Health Score = 100 − Risk Points (capped to keep score in 0–100 range)
-
+'Audit Health Score = 100 − Risk Points (capped to keep score in 0–100 range)'
 
 ### Tiering
 
