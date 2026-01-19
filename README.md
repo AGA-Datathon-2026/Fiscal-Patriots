@@ -16,7 +16,7 @@
 - **California alone** received $1.05 trillion (12% of total)
 - **HHS and USDA** account for 67% of all federal assistance
 
-**What the Audits Reveal**
+**What the Audit Data Revealed**
 - **57,448 entities** required to submit Single Audits (FY2016–2024)
 - **16,300+ entities** had at least one audit finding
 - **$1.09 trillion** in funding went to entities with repeat audit findings
