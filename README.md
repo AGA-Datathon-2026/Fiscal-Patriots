@@ -56,12 +56,14 @@ We connect official public sources using **UEI (Unique Entity Identifier)** when
 ---
 
 ## Repo Structure (Main Branch)
-deliverables/ Submission artifacts (dashboards, slides, report, video)
-webapp/ Website source (HTML pages + assets)
-data/ Clean outputs (CSV + Hyper) organized by domain
-pipeline/ Alteryx workflows + pipeline notes
-docs/ Data dictionaries + appendix hubs + team/competition docs
-assets/ Repo visuals used in README/docs
+```
+deliverables/   Submission artifacts (dashboards, slides, report, video)
+webapp/         Website source (HTML pages + assets)
+data/           Clean outputs (CSV + Hyper) organized by domain
+pipeline/       Alteryx workflows + pipeline notes
+docs/           Data dictionaries + appendix hubs + team/competition docs
+assets/         Repo visuals used in README/docs
+```
 
 ---
 
@@ -71,35 +73,46 @@ These live in:
 `docs/appendix_hubs/methodology/screenshots/alteryx/`
 
 **USAspending transformations**
-- Transaction-level exports transformed into recipient-level summaries by fiscal year (FY2019–FY2024), plus all-years rollups.
+
+USAspending transaction-level data was transformed into recipient-level summaries for each fiscal year (2019–2024), then combined for cumulative analysis. Outputs were exported to CSV and Tableau Hyper formats for dashboard integration.
 
 ![USAspending All Years](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_All_Years.png)
 ![USAspending FY2023](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_FY2023.png)
 ![USAspending FY2024](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_FY2024.png)
 
-**FAC master build**
-- FAC tables joined and aggregated to entity level (`auditee_uei`) to preserve audit flags, finding counts, and federal expenditures.
+**FAC Master Clean**
+
+Four FAC tables (General, Findings, Corrective Action Plans, Federal Awards) were joined and aggregated to entity level by `auditee_uei`, producing 57.4K clean audited entity records. Outputs preserve audit flags, finding counts, and federal expenditure amounts for risk scoring and USAspending integration.
 
 ![FAC Master Clean](docs/appendix_hubs/methodology/screenshots/alteryx/FAC%20Master%20Clean.png)
 
 **Audit Health Score construction**
-- Risk signals combined into Risk Points, then converted into a 0–100 Audit Health Score.
+
+The Audit Health Score was calculated for each entity using weighted risk factors including going concern (25 pts), material weakness (20 pts), repeat findings (15 pts), and significant deficiencies (10 pts), with mitigating factors applied. Entities were tiered into Red, Yellow, and Green categories to support dashboard visualizations and funding analysis.
 
 ![FAC Master With Risk Score](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_Master_With_Risk_Score.png)
 
-**Merges and enrichment**
-- FAC audit context joined to USAspending assistance records on UEI (and fiscal year where applicable).
+**FAC + USAspending Merge**
+
+FAC audit data was joined to USAspending financial assistance records on UEI to link audit findings with federal funding received. This merge enables analysis of how much taxpayer money flowed to entities with material weaknesses, repeat findings, or going concern flags.
 
 ![FAC USAspending Merged](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_USAspending_Merged.png)
+
+**SAM + FAC Merge**
+
+SAM exclusion data was joined to FAC audit records on UEI to identify entities with both exclusion history and audit findings. This cross-reference supports transparency gap analysis of debarred or suspended entities.
+
 ![SAM FAC Merged](docs/appendix_hubs/methodology/screenshots/alteryx/SAM_FAC_Merged.png)
 
-**SAM exclusions**
-- Exclusions split by UEI availability and parsed to support duration and “active vs historical” analysis.
+**SAM Exclusion Cleaning**
+
+SAM exclusion records were split by UEI availability (38K with UEI, 120K legacy records without), with date parsing to calculate exclusion duration and active status. Outputs support transparency gap analysis and cross-referencing of excluded entities against federal award recipients.
 
 ![SAM Exclusion Cleaning](docs/appendix_hubs/methodology/screenshots/alteryx/SAM_Exclusion_Cleaning.png)
 
-**ML training dataset build**
-- Consecutive fiscal years joined on UEI to use prior-year audit signals as predictors and next-year findings as a target.
+**ML Training Dataset Build**
+
+Consecutive fiscal years were joined on UEI to create a supervised learning dataset, using prior-year audit signals as predictors and next-year finding occurrence as the target variable. This structure enables predictive modeling of future audit risk.
 
 ![FAC USAspending ML Training](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_USAspending_ML_Training.png)
 
@@ -110,13 +123,21 @@ These live in:
 These live in:
 `docs/appendix_hubs/methodology/screenshots/tableau/`
 
+**Funding Distribution & Trends**
+
 ![Bar - Top 10 States Receive 50.9% of All Federal Grants](docs/appendix_hubs/methodology/screenshots/tableau/Bar%20-%20Top%2010%20States%20Receive%2050.9%25%20of%20All%20Federal%20Grants.png)
 ![Cumulative Federal Funding (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Cumulative%20Federal%20Funding%20%28FY2019-2024%29.png)
 ![Federal Funding (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Federal%20Funding%20%28FY2019-2024%29.png)
 ![Federal Funding by Top 5 States (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Federal%20Funding%20by%20Top%205%20States%20%28FY2019-2024%29.png)
+
+**Audit Oversight Signals**
+
 ![Findings Per $1M in Federal Spending by State](docs/appendix_hubs/methodology/screenshots/tableau/Findings%20Per%20%241M%20in%20Federal%20Spending%20by%20State.png)
 ![Map - Material Weakness by State](docs/appendix_hubs/methodology/screenshots/tableau/Map%20-%20Material%20Weakness%20by%20State.png)
 ![Map - Material Weakness Rate by State](docs/appendix_hubs/methodology/screenshots/tableau/Map%20-%20Material%20Weakness%20Rate%20by%20State.png)
+
+**Risk Tiering**
+
 ![Risk vs Protection Red Tier Shows Worst Combination](docs/appendix_hubs/methodology/screenshots/tableau/Risk%20vs%20Protection%20Red%20Tier%20Shows%20Worst%20Combination.png)
 
 ---
