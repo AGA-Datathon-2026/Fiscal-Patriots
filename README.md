@@ -164,7 +164,7 @@ A 0–100 screening signal designed for interpretability and responsible priorit
 
 ### Definition
 
-'Audit Health Score = 100 − Risk Points (capped to keep score in 0–100 range)'
+`Audit Health Score = 100 − Risk Points (capped to keep score in 0–100 range)`
 
 ### Tiering
 
