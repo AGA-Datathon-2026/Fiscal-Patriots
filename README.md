@@ -141,6 +141,8 @@ These live in:
 
 **Funding Distribution & Trends**
 
+These visualizations show where federal financial assistance flows geographically and how funding levels changed over the six-year period. The Top 10 states account for over half of all federal grants, with California alone receiving 12% of the national total.
+
 ![Bar - Top 10 States Receive 50.9% of All Federal Grants](docs/appendix_hubs/methodology/screenshots/tableau/Bar%20-%20Top%2010%20States%20Receive%2050.9%25%20of%20All%20Federal%20Grants.png)
 ![Cumulative Federal Funding (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Cumulative%20Federal%20Funding%20%28FY2019-2024%29.png)
 ![Federal Funding (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Federal%20Funding%20%28FY2019-2024%29.png)
@@ -148,11 +150,15 @@ These live in:
 
 **Audit Oversight Signals**
 
+These maps highlight where audit findings are concentrated relative to funding received. Material weakness rates vary significantly by state, revealing geographic patterns in internal control quality.
+
 ![Findings Per $1M in Federal Spending by State](docs/appendix_hubs/methodology/screenshots/tableau/Findings%20Per%20%241M%20in%20Federal%20Spending%20by%20State.png)
 ![Map - Material Weakness by State](docs/appendix_hubs/methodology/screenshots/tableau/Map%20-%20Material%20Weakness%20by%20State.png)
 ![Map - Material Weakness Rate by State](docs/appendix_hubs/methodology/screenshots/tableau/Map%20-%20Material%20Weakness%20Rate%20by%20State.png)
 
 **Risk Tiering**
+
+This visualization shows the relationship between Audit Health Score and federal funding received. Red-tier entities received disproportionately more funding than Green-tier entities with cleaner audit records.
 
 ![Risk vs Protection Red Tier Shows Worst Combination](docs/appendix_hubs/methodology/screenshots/tableau/Risk%20vs%20Protection%20Red%20Tier%20Shows%20Worst%20Combination.png)
 
