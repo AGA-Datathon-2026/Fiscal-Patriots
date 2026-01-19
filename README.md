@@ -1,21 +1,16 @@
 # Fiscal Patriots
 
+**AuditsMadeSimple • AGA Datathon 2026**
 
+> A public-facing educational platform helping citizens explore federal financial assistance alongside audit oversight signals.
 
-**AuditsMadeSimple  •  AGA Datathon 2026**
-
-
-
-
-> A public-facing educational platform helping citizens explore federal financial assistance alongside audit oversight signals
-
-🌐 **Live Website:** [gmufiscalpatriots.bytechisel.com](https://gmufiscalpatriots.bytechisel.com)
+🌐 **Live Website:** https://gmufiscalpatriots.bytechisel.com
 
 ---
 
 ## Why This Exists
 
-Federal funding data is large, fragmented, and hard to interpret quickly. Audit data is even harder because it uses specialized terminology and the impact is not always obvious. Our goal is to make these systems approachable without oversimplifying the responsibility required to interpret oversight data.
+Federal funding data is large, fragmented, and hard to interpret quickly. Audit oversight data is even harder because it uses specialized terminology and the impact is not always obvious. Our goal is to make these systems approachable without oversimplifying the responsibility required to interpret oversight signals.
 
 **This project helps users:**
 - Explore funding patterns by geography and time
@@ -27,182 +22,152 @@ Federal funding data is large, fragmented, and hard to interpret quickly. Audit 
 
 ## What We Built
 
-### 1. Interactive Exploration (Tableau)
+### 1) Interactive Exploration (Tableau)
 Dashboards that highlight:
 - Funding distribution across states
 - Funding trends over time
 - Major funding sources by federal agency
-- High-risk entities with funding context
+- Higher-risk entities with funding context
 
-### 2. Financial Literacy Glossary
-A glossary section translating common audit and spending terms into short, useful explanations — making government accountability language accessible for everyday citizens.
+### 2) Financial Literacy Glossary
+A glossary translating common audit and spending terms into short, usable definitions.
 
-### 3. Dataset Guide
-Descriptions of USAspending, FAC, and SAM — what each tracks, what it misses, and how to navigate them for your own research questions.
+### 3) Dataset Guide
+Plain descriptions of USAspending, FAC, and SAM: what each tracks, what each misses, and how to use them responsibly.
 
-### 4. Guided Engagement (Case Studies & What's Next)
-Short walkthroughs and a checklist-style next steps page that keeps visitors engaged and shows what to do after the first chart.
+### 4) Guided Engagement (Case Studies + What’s Next)
+Short walkthroughs and a checklist-style “What’s next?” page that keeps visitors engaged after their first chart.
 
-### 5. Audit Health Score (Screening Signal)
-A simple, interpretable 0-100 score designed to help users prioritize where to look deeper — without claiming wrongdoing.
+### 5) Audit Health Score (Screening Signal)
+A simple, interpretable 0–100 score designed to help users prioritize attention without claiming wrongdoing.
 
 ---
 
 ## Integrated Data Sources
 
-We connect official public sources using UEI (Unique Entity Identifier) whenever possible:
+We connect official public sources using **UEI (Unique Entity Identifier)** whenever possible.
 
-| Source | What It Tracks | Coverage |
-|--------|----------------|----------|
-| **USAspending.gov** | Federal spending and award transactions — who received funds, how much, from which agency | 74M records |
-| **FAC.gov** | Single Audit submissions for non-federal entities expending $750K+ in federal awards | 57K entities |
-| **SAM.gov** | Governmentwide exclusions — debarments, suspensions, and other exclusion actions | 167K records |
+| Source | What It Tracks |
+|--------|-----------------|
+| **USAspending.gov** | Federal spending and award transactions: who received funds, how much, and from which agency |
+| **FAC.gov** | Single Audit submissions for non-federal entities expending $750K+ in federal awards |
+| **SAM.gov** | Governmentwide exclusions: debarments, suspensions, and other exclusion actions |
 
 ---
 
-USAspending transaction-level data was transformed into recipient-level summaries for each fiscal year (2019–2024), then combined to enable year-over-year trend analysis and cumulative funding calculations. Both yearly and all-years outputs were exported to CSV and Tableau Hyper formats for dashboard integration.
+## Repo Structure (Main Branch)
+deliverables/ Submission artifacts (dashboards, slides, report, video)
+webapp/ Website source (HTML pages + assets)
+data/ Clean outputs (CSV + Hyper) organized by domain
+pipeline/ Alteryx workflows + pipeline notes
+docs/ Data dictionaries + appendix hubs + team/competition docs
+assets/ Repo visuals used in README/docs
 
-<img width="1353" height="935" alt="USAspending_All_Years" src="https://github.com/user-attachments/assets/7f44edcb-4a57-4ab4-b20d-6b26beecc1ba" />
+---
 
-<img width="1770" height="1121" alt="USAspending_FY2023" src="https://github.com/user-attachments/assets/8869ee33-56bc-48c5-8751-47e56452ad79" />
+## Screenshot Gallery (Everything in-repo)
 
-<img width="1728" height="932" alt="USAspending_FY2024" src="https://github.com/user-attachments/assets/c9c9ff4f-81b6-488b-acb6-cb003f5e7798" />
+This section is intentionally exhaustive so every screenshot in the repo has a place to render in the README.
 
-SAM FAC Merge:
-FAC audit data was joined to USAspending financial assistance records on UEI to link audit findings with federal funding received. This merge enables analysis of how much taxpayer money flowed to entities with material weaknesses, repeat findings, or going concern flags.
+### Repo visuals
 
-<img width="1285" height="806" alt="SAM_FAC_Merged" src="https://github.com/user-attachments/assets/c39614c7-d663-4933-b062-093513ea3b05" />
+![Dashboard overview](assets/dashboard.png)
+![Pipeline overview](assets/pipeline.png)
 
-SAM Exclusion Cleaning:
-SAM exclusion records were split by UEI availability (38K with UEI, 120K legacy records without), with date parsing to calculate exclusion duration and active status. Outputs support transparency gap analysis and cross-referencing of excluded entities against federal award recipients.
+### Competition reference
 
-<img width="1272" height="1132" alt="SAM_Exclusion_Cleaning" src="https://github.com/user-attachments/assets/b983f7d1-e5ea-40dd-8efe-7947c34f0cf8" />
+![Allowable Data Sources](docs/competition/Allowable%20Data%20Sources.png)
 
-FAC Master Clean:
-Four FAC tables (General, Findings, Corrective Action Plans, Federal Awards) were joined and aggregated to entity level by auditee_uei, producing 57.4K clean audited entity records. Outputs preserve audit flags, finding counts, and federal expenditure amounts for risk scoring and USAspending integration.
+---
 
-<img width="2083" height="1109" alt="FAC Master Clean" src="https://github.com/user-attachments/assets/676f71b2-e1c8-4644-8104-6bc4053b31c6" />
+## Methodology Screenshots (Alteryx)
 
-USAspending and FAC Merge:
- 
-FAC audit data (FY2023–FY2024) was joined to USAspending financial assistance records on auditee_uei = recipient_uei by fiscal year, linking audit findings to federal funding received. Outputs include merged detail records, summary by risk tier, and top 10 high-risk recipients by federal funding.
+These live in:
+`docs/appendix_hubs/methodology/screenshots/alteryx/`
 
-<img width="2097" height="928" alt="FAC_USAspending_Merged" src="https://github.com/user-attachments/assets/6487e733-e40f-4f8d-b077-3eabfe35e464" />
+**USAspending transformations**
+- Transaction-level exports transformed into recipient-level summaries by fiscal year (FY2019–FY2024), plus all-years rollups.
 
-FAC USAspending ML Training:
-Training data was constructed by joining consecutive fiscal years (FY22→FY23, FY23→FY24) on UEI, using prior-year audit findings as predictors and next-year finding occurrence as the target variable. The stacked dataset enables Random Forest modeling to identify which audit indicators best predict future compliance issues.
+![USAspending All Years](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_All_Years.png)
+![USAspending FY2023](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_FY2023.png)
+![USAspending FY2024](docs/appendix_hubs/methodology/screenshots/alteryx/USAspending_FY2024.png)
 
-<img width="2554" height="704" alt="FAC_USAspending_ML_Training" src="https://github.com/user-attachments/assets/2cac7b6e-0223-44f4-897b-ebb223ac8361" />
+**FAC master build**
+- FAC tables joined and aggregated to entity level (`auditee_uei`) to preserve audit flags, finding counts, and federal expenditures.
+
+![FAC Master Clean](docs/appendix_hubs/methodology/screenshots/alteryx/FAC%20Master%20Clean.png)
+
+**Audit Health Score construction**
+- Risk signals combined into Risk Points, then converted into a 0–100 Audit Health Score.
+
+![FAC Master With Risk Score](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_Master_With_Risk_Score.png)
+
+**Merges and enrichment**
+- FAC audit context joined to USAspending assistance records on UEI (and fiscal year where applicable).
+
+![FAC USAspending Merged](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_USAspending_Merged.png)
+![SAM FAC Merged](docs/appendix_hubs/methodology/screenshots/alteryx/SAM_FAC_Merged.png)
+
+**SAM exclusions**
+- Exclusions split by UEI availability and parsed to support duration and “active vs historical” analysis.
+
+![SAM Exclusion Cleaning](docs/appendix_hubs/methodology/screenshots/alteryx/SAM_Exclusion_Cleaning.png)
+
+**ML training dataset build**
+- Consecutive fiscal years joined on UEI to use prior-year audit signals as predictors and next-year findings as a target.
+
+![FAC USAspending ML Training](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_USAspending_ML_Training.png)
+
+---
+
+## Methodology Screenshots (Tableau)
+
+These live in:
+`docs/appendix_hubs/methodology/screenshots/tableau/`
+
+![Bar - Top 10 States Receive 50.9% of All Federal Grants](docs/appendix_hubs/methodology/screenshots/tableau/Bar%20-%20Top%2010%20States%20Receive%2050.9%25%20of%20All%20Federal%20Grants.png)
+![Cumulative Federal Funding (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Cumulative%20Federal%20Funding%20%28FY2019-2024%29.png)
+![Federal Funding (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Federal%20Funding%20%28FY2019-2024%29.png)
+![Federal Funding by Top 5 States (FY2019-2024)](docs/appendix_hubs/methodology/screenshots/tableau/Federal%20Funding%20by%20Top%205%20States%20%28FY2019-2024%29.png)
+![Findings Per $1M in Federal Spending by State](docs/appendix_hubs/methodology/screenshots/tableau/Findings%20Per%20%241M%20in%20Federal%20Spending%20by%20State.png)
+![Map - Material Weakness by State](docs/appendix_hubs/methodology/screenshots/tableau/Map%20-%20Material%20Weakness%20by%20State.png)
+![Map - Material Weakness Rate by State](docs/appendix_hubs/methodology/screenshots/tableau/Map%20-%20Material%20Weakness%20Rate%20by%20State.png)
+![Risk vs Protection Red Tier Shows Worst Combination](docs/appendix_hubs/methodology/screenshots/tableau/Risk%20vs%20Protection%20Red%20Tier%20Shows%20Worst%20Combination.png)
+
+---
 
 ## Audit Health Score
 
-A 0-100 screening signal designed for interpretability and responsible prioritization.
+A 0–100 screening signal designed for interpretability and responsible prioritization.
 
 ### Definition
-```
-Audit Health Score = 100 − Risk Points (capped to keep score in 0-100 range)
-```
+
+Audit Health Score = 100 − Risk Points (capped to keep score in 0–100 range)
+
 
 ### Tiering
 
 | Tier | Score | Interpretation |
 |------|-------|----------------|
-| 🟢 **Green** | 80-100 | Fewer oversight signals — continue standard validation |
-| 🟡 **Yellow** | 60-79 | Moderate signals — review patterns year-over-year |
-| 🔴 **Red** | 0-59 | Highest oversight signals — prioritize for deeper review |
-
-### Risk Signals (Examples)
-
-**Risk Points increase based on:**
-- Severity of findings and internal control issues
-- Repeat findings across years
-- Questioned costs indicators
-- Going concern or modified opinion indicators
-
-**Risk Points decrease based on:**
-- Low-risk auditee designation
-- Stronger corrective action patterns
+| 🟢 **Green** | 80–100 | Fewer oversight signals — continue standard validation |
+| 🟡 **Yellow** | 60–79 | Moderate signals — review patterns year-over-year |
+| 🔴 **Red** | 0–59 | Highest oversight signals — prioritize for deeper review |
 
 > ⚠️ **Important:** This score is a prioritization aid, not a verdict. It does not prove fraud, waste, or abuse.
 
-FAC Master with Risk Score: 
-The Audit Health Score was calculated for each entity using weighted risk factors including going concern (25 pts), material weakness (20 pts), repeat findings (15 pts), and significant deficiencies (10 pts), with mitigating factors applied. Entities were tiered into Red (high risk), Yellow (moderate), and Green (low risk) categories to support dashboard visualizations and funding analysis.
-
-<img width="2623" height="1127" alt="FAC_Master_With_Risk_Score" src="https://github.com/user-attachments/assets/47a7b1ad-5e04-417f-858c-ccc0d08ac0f1" />
-
-
----
-
-## Predictive Modeling Prototype
-
-An early prototype exploring whether audit and funding history can help anticipate future risk signals.
-
-- **Goal:** Entity-year prediction (use year t to predict findings in year t+1)
-- **Approach:** HistGradientBoosting classification on engineered features
-- **Feature families:** Prior findings counts/flags, award volume, funding totals/mix, agency/program diversity
-- **Performance:** ROC-AUC 0.7656, PR-AUC 0.5439
-
-*This is a prototype for learning and prioritization, not an operational system.*
-
----
-
-## Key Datasets & Deliverables
-
-| Dataset | File / Path |
-|---------|-------------|
-| FAC + USAspending Merged Detail | `FAC_USAspending_Merged_Detail.csv` |
-| Summary by Tier | `FAC_USAspending_Summary_By_Tier.csv` |
-| Top 10 Red by Federal Funding | `FAC_USAspending_Top_10_Red_By_Federal_Funding.csv` |
-| Audit Health Score Master | `FAC_Master_With_Risk_Score.csv` |
-| Alteryx Workflow (Risk Score) | `FAC_Master_With_Risk_Score.yxmd` |
-
-*Each dataset includes a corresponding data dictionary (.docx).*
-
-### Tableau Workbooks
-- `AGA datathon visualizations - USAspending Updated.twbx`
-- `FAC-Merged set AGA datathon.twbx`
-
----
-
-## Repository Structure - Main Branch (TO BE UPDATED)
-
-```
-├── deliverables/
-│   ├── dashboard/      # Tableau workbooks
-│   ├── slides/         # Presentation PDF
-│   ├── video/          # Video submission
-│   └── report/         # Written report
-├── data/
-│   └── analysis_core/  # Merged datasets & dictionaries
-├── pipeline/
-│   └── alteryx/        # Workflow files (.yxmd)
-├── docs/               # Competition & team docs
-└── assets/             # Visuals and images
-```
+Scoring documentation:
+- `docs/appendix_hubs/scoring/score_formula_and_tiers.md`
+- `docs/appendix_hubs/scoring/variable_definitions.md`
+- `docs/appendix_hubs/scoring/weighting_rationale.md`
 
 ---
 
 ## How to Explore the Project
 
-For the fastest tour:
-
-1. **Visit the live site:** [gmufiscalpatriots.bytechisel.com](https://gmufiscalpatriots.bytechisel.com)
-2. **Open the Tableau dashboards** (links accessible from the site)
-3. **Read the glossary section** to understand audit terminology
-4. **Use the "What's Next?" page** to follow guided questions
-
----
-
-## How to Reproduce (High Level)
-
-1. Collect raw extracts from USAspending, FAC, and SAM exclusions
-2. Standardize identifiers (UEI formatting, missingness handling)
-3. Compute risk indicators and Risk Points
-4. Convert Risk Points into Audit Health Score and tier labels
-5. Merge FAC audit context with USAspending funding context on UEI
-6. Export analysis outputs for Tableau and website
-
-**Start with:** `FAC_Master_With_Risk_Score.yxmd` (Alteryx) → `FAC_USAspending_Merged_Detail.csv`
+1. Visit the live site: https://gmufiscalpatriots.bytechisel.com  
+2. Open the Tableau dashboards (linked from the site)
+3. Read the glossary to understand audit terminology
+4. Use “What’s next?” to follow guided questions and case studies
 
 ---
 
@@ -212,7 +177,7 @@ For the fastest tour:
 |----------|-------|
 | Data Processing | Alteryx, Python |
 | Visualization | Tableau Public |
-| Machine Learning | HistGradientBoosting (scikit-learn) |
+| Machine Learning | scikit-learn |
 | Website | HTML, CSS, AWS |
 
 ---
@@ -231,7 +196,7 @@ For the fastest tour:
 
 ## Disclaimer
 
-*This project is for educational and public understanding purposes. Audit and exclusion signals require context. The presence of a finding or a higher-risk tier is not proof of wrongdoing. Always validate conclusions with primary documentation, program context, and proper investigative standards.*
+This project is for educational and public understanding purposes. Audit and exclusion signals require context. The presence of a finding or a higher-risk tier is not proof of wrongdoing. Always validate conclusions using primary documentation, program context, and appropriate investigative standards.
 
 ---
 
