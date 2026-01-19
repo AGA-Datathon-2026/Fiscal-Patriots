@@ -1,5 +1,15 @@
 # Fiscal Patriots
 
+## Team (Fiscal Patriots)
+
+| Name | Role | Phone | Bio |
+|------|------|------|------|
+| Khaled Alkurd | Team Lead | (703) 231-4491
+| Pranavi Doodala | Project Manager |
+| Mariam Debas | Visualization Lead |
+| Nikita Chandrasing | Product Manager |
+| Andy Yaro | Product Developer |
+
 **AuditsMadeSimple • AGA Datathon 2026**
 
 > A public-facing educational platform helping citizens explore federal financial assistance alongside audit oversight signals.
@@ -208,18 +218,6 @@ Scoring documentation:
 | Visualization | Tableau Public |
 | Machine Learning | scikit-learn |
 | Website | HTML, CSS, AWS |
-
----
-
-## Team (Fiscal Patriots)
-
-| Name | Role | Phone |
-|------|------|------|
-| Khaled Alkurd | Team Lead | (703) 231-4491
-| Pranavi Doodala | Project Manager |
-| Mariam Debas | Visualization Lead |
-| Nikita Chandrasing | Product Manager |
-| Andy Yaro | Product Developer |
 
 ---
 
