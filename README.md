@@ -16,7 +16,7 @@
 
 🌐 **Live Website:** https://gmufiscalpatriots.bytechisel.com
 
-📊 **Presentation:** [View Presentation on Canva](https://www.canva.com/design/DAG-i1oWD9I/KMNis1ROB6pK2cwoNZs0Cg/edit?utm_content=DAG-i1oWD9I&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+📊 **Presentation:** [View Presentation on Canva](https://www.canva.com/design/DAG-i1oWD9I/f_YqGEZFJ-amtJ2KuGCMFA/view?utm_content=DAG-i1oWD9I&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2f1e7a7836)
 
 ▶️ **Video Walkthrough:** [Watch on YouTube](https://youtu.be/i0x2yidgPiY)
 
