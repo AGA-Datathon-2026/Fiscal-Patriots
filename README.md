@@ -12,19 +12,13 @@
 
 **AuditsMadeSimple • AGA Datathon 2026**
 
-> A public-facing educational platform helping citizens explore federal financial assistance alongside audit oversight signals.
+> A public-facing educational platform helping citizens understand federal financial assistance and audit data.
 
 🌐 **Live Website:** https://gmufiscalpatriots.bytechisel.com
 
 📊 **Presentation:** [View Presentation on Canva](https://www.canva.com/design/DAG-i1oWD9I/f_YqGEZFJ-amtJ2KuGCMFA/view?utm_content=DAG-i1oWD9I&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2f1e7a7836)
 
 ▶️ **Video Walkthrough:** [Watch on YouTube](https://youtu.be/i0x2yidgPiY)
-
----
-
-## Abstract
-
-Fiscal Patriot Dashboard integrates USAspending, FAC, and SAM data to help citizens explore $8.58 trillion in federal financial assistance alongside audit oversight signals. Our Audit Health Score identified $1.09 trillion flowing to repeatedly flagged entities, with interactive dashboards and a glossary making government accountability accessible to non-technical users.
 
 ---
 
@@ -52,33 +46,27 @@ Fiscal Patriot Dashboard integrates USAspending, FAC, and SAM data to help citiz
 
 ## Key Findings
 
-**Scale of Federal Funding**
 - **$8.58 trillion** in federal financial assistance distributed (FY2019–2024)
 - **Top 10 states** received 50.9% of all federal grants
 - **California alone** received $1.05 trillion (12% of total)
 - **HHS and USDA** account for 67% of all federal assistance
-
-**What the Audit Data Revealed**
 - **57,448 entities** required to submit Single Audits (FY2016–2024)
 - **16,300+ entities** had at least one audit finding
-- **$1.09 trillion** in funding went to entities with repeat audit findings
-- **38,000 SAM-excluded entities** with UEI available for cross-referencing
 
 ---
 
 ## Why This Exists
 
-Federal funding data is large, fragmented, and hard to interpret quickly. Audit oversight data is even harder because it uses specialized terminology and the impact is not always obvious. Our goal is to make these systems approachable without oversimplifying the responsibility required to interpret oversight signals.
+Federal funding data is large, fragmented, and hard to interpret quickly. Audit data is even harder because it uses specialized terminology and the impact is not always obvious. Our goal is to make these systems approachable for everyone.
 
 **This project helps users:**
 - Explore funding patterns by geography and time
 - Learn audit terminology with plain-language definitions
-- Use a screening signal (Audit Health Score) to identify entities that may merit a closer look
-- Follow guided examples (case studies and next steps) to investigate responsibly
+- Follow guided examples (case studies and next steps) to investigate audit data more deeply
 
 ---
 
-## What We Built
+## Key Features of AuditsMadeSimple
 
 ### 1) Interactive Exploration (Tableau)
 Dashboards that highlight:
@@ -95,9 +83,6 @@ Plain descriptions of USAspending, FAC, and SAM: what each tracks, what each mis
 
 ### 4) Guided Engagement (Case Studies + What’s Next)
 Short walkthroughs and a checklist-style “What’s next?” page that keeps visitors engaged after their first chart.
-
-### 5) Audit Health Score (Screening Signal)
-A simple, interpretable 0–100 score designed to help users prioritize attention without claiming wrongdoing.
 
 ---
 
@@ -168,12 +153,6 @@ SAM exclusion records were split by UEI availability (38K with UEI, 120K legacy 
 
 ![SAM Exclusion Cleaning](docs/appendix_hubs/methodology/screenshots/alteryx/SAM_Exclusion_Cleaning.png)
 
-**ML Training Dataset Build**
-
-Consecutive fiscal years were joined on UEI to create a supervised learning dataset, using prior-year audit signals as predictors and next-year finding occurrence as the target variable. This structure enables predictive modeling of future audit risk.
-
-![FAC USAspending ML Training](docs/appendix_hubs/methodology/screenshots/alteryx/FAC_USAspending_ML_Training.png)
-
 ---
 
 ## Methodology Screenshots (Tableau)
@@ -203,31 +182,6 @@ These maps highlight where audit findings are concentrated relative to funding r
 This visualization shows the relationship between Audit Health Score and federal funding received. Red-tier entities received disproportionately more funding than Green-tier entities with cleaner audit records.
 
 ![Risk vs Protection Red Tier Shows Worst Combination](docs/appendix_hubs/methodology/screenshots/tableau/Risk%20vs%20Protection%20Red%20Tier%20Shows%20Worst%20Combination.png)
-
----
-
-## Audit Health Score
-
-A 0–100 screening signal designed for interpretability and responsible prioritization.
-
-### Definition
-
-`Audit Health Score = 100 − Risk Points (capped to keep score in 0–100 range)`
-
-### Tiering
-
-| Tier | Score | Interpretation |
-|------|-------|----------------|
-| 🟢 **Green** | 80–100 | Fewer oversight signals — continue standard validation |
-| 🟡 **Yellow** | 60–79 | Moderate signals — review patterns year-over-year |
-| 🔴 **Red** | 0–59 | Highest oversight signals — prioritize for deeper review |
-
-> ⚠️ **Important:** This score is a prioritization aid, not a verdict. It does not prove fraud, waste, or abuse.
-
-Scoring documentation:
-- `docs/appendix_hubs/scoring/score_formula_and_tiers.md`
-- `docs/appendix_hubs/scoring/variable_definitions.md`
-- `docs/appendix_hubs/scoring/weighting_rationale.md`
 
 ---
 
