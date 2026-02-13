@@ -8,7 +8,7 @@
 | Pranavi Doodala | Project Manager |------| GMU Spring '26 Business Analytics; Data Mining, Predictive Modeling, Project Management
 | Mariam Debas | Visualization Lead |------| GMU Spring '26 Accounting, Data Analytics, Tableau, R
 | Nikita Chandrasing | Product Manager |------| GMU Fall '25 Business Analytics and MIS; Data Mining, Data Visualization, Product Design
-| Andy Yaro | Product Developer |------| GMU Fall '2028 Cybersecurity Engineering; python, git, aws
+| Andy Yaro | Product Developer |------| GMU Fall '28 Cybersecurity Engineering; python, git, aws
 
 **AuditsMadeSimple • AGA Datathon 2026**
 
