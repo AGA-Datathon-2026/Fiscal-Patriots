@@ -6,8 +6,7 @@ Full audit findings for flagged entities.
 ---
 
 ## Current status
-NOT IN REPO YET as a consolidated case study pack.
-
+[Completed. Link to Notebook](https://github.com/fiscalpatriots/AGA_Datathon_2026/blob/main/models/predictive_audit_findings/Datathon%20Predictive%20Modeling%20v3.ipynb)
 ---
 
 ## Recommended repo location to add later (have to meet with Pranavi/Khaled)
