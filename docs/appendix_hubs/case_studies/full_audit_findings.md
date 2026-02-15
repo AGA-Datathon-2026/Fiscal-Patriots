@@ -6,7 +6,7 @@ Full audit findings for flagged entities.
 ---
 
 ## Current status
-[Full audit findings for flagged entities.](https://github.com/fiscalpatriots/AGA_Datathon_2026/blob/main/models/predictive_audit_findings/Datathon%20Predictive%20Modeling%20v3.ipynb)
+[Link to notebook.](https://github.com/fiscalpatriots/AGA_Datathon_2026/blob/main/models/predictive_audit_findings/Datathon%20Predictive%20Modeling%20v3.ipynb)
 
 ---
 
