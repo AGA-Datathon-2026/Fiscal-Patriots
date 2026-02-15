@@ -184,6 +184,34 @@ This visualization shows the relationship between Audit Health Score and federal
 ![Risk vs Protection Red Tier Shows Worst Combination](docs/appendix_hubs/methodology/screenshots/tableau/Risk%20vs%20Protection%20Red%20Tier%20Shows%20Worst%20Combination.png)
 
 ---
+## ML Model & Predictive Findings
+
+We built a predictive model that acts as an early warning signal. It flags organizations that are more likely to have audit findings next year (t+1), using what we already know this year (t). The goal is to help oversight teams prioritize review and support when resources are limited.  
+Full case study: https://gmufiscalpatriots.bytechisel.com/ml_model_casestudy.html
+
+### Data and setup
+- Data source: Federal Audit Clearinghouse (FAC), audit year files from 2019 to 2022.  
+- Grain: one row per entity per audit year (entity year panel).  
+- Entity key: Employer Identification Number (EIN), since Unique Entity Identifier (UEI) has many placeholders in earlier years.  
+- Label: whether the entity has any findings in the next year (t+1), created by shifting outcomes forward within each entity.  
+
+### Model and performance
+- Model: Histogram based Gradient Boosting (HistGradientBoostingClassifier), from scikit-learn.  
+- Metrics: Receiver Operating Characteristic Area Under the Curve (ROC-AUC), and Precision Recall Area Under the Curve (PR-AUC).  
+- Results: ROC-AUC = 0.7656, PR-AUC = 0.5439. A logistic regression baseline scored ROC-AUC = 0.7575 and PR-AUC = 0.5044.  
+
+### What the model learned
+We used permutation feature importance to keep results explainable. Top signals included:
+- prior findings indicators (whether findings happened, and how many)
+- award structure and complexity (direct award lines, major award lines)
+- breadth across agencies and programs (distinct agencies, distinct programs)
+- concentration signals (max program total)
+
+### Figures
+
+![Figure 1: Model performance](<models/predictive_audit_findings/screenshots/figure 1.png>)
+
+![Figure 2: Feature importance](<models/predictive_audit_findings/screenshots/figure 2.png>)
 
 ## How to Explore the Project
 
