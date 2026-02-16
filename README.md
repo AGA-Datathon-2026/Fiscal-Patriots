@@ -222,17 +222,6 @@ We used permutation feature importance to keep results explainable. Top signals 
 
 ---
 
-## Tools & Technologies
-
-| Category | Tools |
-|----------|-------|
-| Data Processing | Alteryx, Python |
-| Visualization | Tableau Public |
-| Machine Learning | scikit-learn |
-| Website | HTML, CSS, AWS |
-
----
-
 ## Disclaimer
 
 This project is for educational and public understanding purposes. Audit and exclusion signals require context. The presence of a finding or a higher-risk tier is not proof of wrongdoing. Always validate conclusions using primary documentation, program context, and appropriate investigative standards.
