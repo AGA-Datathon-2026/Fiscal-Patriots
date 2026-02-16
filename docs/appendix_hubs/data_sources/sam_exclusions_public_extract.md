@@ -22,4 +22,4 @@ Links SAM exclusions sources and our repo snapshot.
 ---
 
 ## Notes
-- Many exclusions records do not include UEI, so not all link cleanly.
+- SAM.gov exclusions cover both entities and individuals. Not all records include a UEI. Individual records never carry one, and some older entity records predate UEI assignment, so linkage to USAspending and FAC is partial.
