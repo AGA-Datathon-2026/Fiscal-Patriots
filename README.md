@@ -108,7 +108,7 @@ webapp/         Website source (HTML pages + assets)
 data/           Clean outputs (CSV + Hyper) organized by domain
 pipeline/       Alteryx workflows + pipeline notes
 docs/           Data dictionaries + appendix hubs + team/competition docs
-assets/         Repo visuals used in README/docs
+models/         ML model notebooks, outputs, and screenshots
 ```
 
 ---
