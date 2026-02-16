@@ -24,23 +24,26 @@
 
 ## Development Tools
 
-| Category | Tools |
-|----------|-------|
-| Data Processing | Alteryx, Python |
-| Visualization | Tableau Public |
-| Machine Learning | scikit-learn |
-| Website | HTML, CSS, AWS |
-| AI Assistance | Claude, Google Gemini |
+| Category | Tools | Used For |
+| --- | --- | --- |
+| Data Processing | [Alteryx](https://www.alteryx.com/), [Python](https://www.python.org/) | Data cleaning, merging, Audit Health Score pipeline |
+| Visualization | [Tableau Public](https://public.tableau.com/) | Interactive dashboards embedded on the platform |
+| Machine Learning | [scikit-learn](https://scikit-learn.org/) | HistGradientBoosting classifier, permutation importance |
+| Interpretability | [SHAP](https://shap.readthedocs.io/) | Feature-level impact analysis for model transparency |
+| Website | HTML, CSS, [AWS](https://aws.amazon.com/) | Static site hosting and deployment |
+| AI Assistance | [Claude](https://claude.ai/), [Google Gemini](https://gemini.google.com/) | Code generation assistance and iterative development |
 
 ---
 
 ## Python Libraries
 
 | Library | Purpose |
-|---------|---------|
-| `scikit-learn` | HistGradientBoostingClassifier, model evaluation metrics (ROC-AUC, PR-AUC), permutation importance |
-| `pandas` | Data cleaning, feature engineering, entity-year aggregation |
-| `matplotlib` | Feature importance visualization |
+| --- | --- |
+| [`scikit-learn`](https://scikit-learn.org/) | Model training, evaluation (ROC-AUC), permutation importance |
+| [`pandas`](https://pandas.pydata.org/) | Data cleaning, feature engineering, entity-year aggregation |
+| [`numpy`](https://numpy.org/) | Numerical operations and array handling |
+| [`shap`](https://shap.readthedocs.io/) | SHAP value analysis for model interpretability |
+| [`matplotlib`](https://matplotlib.org/) | Feature importance and performance visualization |
 
 ---
 
