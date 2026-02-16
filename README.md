@@ -108,7 +108,7 @@ webapp/         Website source (HTML pages + assets)
 data/           Clean outputs (CSV + Hyper) organized by domain
 pipeline/       Alteryx workflows + pipeline notes
 docs/           Data dictionaries + appendix hubs + team/competition docs
-assets/         Repo visuals used in README/docs
+models/         ML model notebooks, outputs, and screenshots
 ```
 
 ---
@@ -194,21 +194,24 @@ Full case study: https://gmufiscalpatriots.bytechisel.com/ml_model_casestudy.htm
 
 ### Data and setup
 - Data source: Federal Audit Clearinghouse (FAC), audit year files from 2019 to 2022.  
-- Grain: one row per entity per audit year (entity year panel).  
+- Grain: one row per entity per audit year (entity-year panel). 110,739 total observations across 56,333 unique entities.  
 - Entity key: Employer Identification Number (EIN), since Unique Entity Identifier (UEI) has many placeholders in earlier years.  
 - Label: whether the entity has any findings in the next year (t+1), created by shifting outcomes forward within each entity.  
-
+- Train/test split: time-based. Trained on 2019–2020, tested on 2021 to prevent data leakage.
+  
 ### Model and performance
-- Model: Histogram based Gradient Boosting (HistGradientBoostingClassifier), from scikit-learn.  
-- Metrics: Receiver Operating Characteristic Area Under the Curve (ROC-AUC), and Precision Recall Area Under the Curve (PR-AUC).  
-- Results: ROC-AUC = 0.7656, PR-AUC = 0.5439. A logistic regression baseline scored ROC-AUC = 0.7575 and PR-AUC = 0.5044.  
-
+- Model: Histogram-based Gradient Boosting (HistGradientBoostingClassifier), from scikit-learn.  
+- Primary metric: ROC-AUC = 0.7656 — the model correctly ranks a risky entity above a non-risky one 77% of the time.  
+- Secondary metric: PR-AUC = 0.5439 (3x the random baseline of 0.18), reflecting strong positive-class concentration despite class imbalance in audit findings.
+  
 ### What the model learned
-We used permutation feature importance to keep results explainable. Top signals included:
+We used permutation feature importance and SHAP (SHapley Additive Explanations) to keep results explainable. Top signals included:
 - prior findings indicators (whether findings happened, and how many)
 - award structure and complexity (direct award lines, major award lines)
 - breadth across agencies and programs (distinct agencies, distinct programs)
 - concentration signals (max program total)
+
+SHAP analysis confirmed that prior findings are the dominant predictor, with high feature values pushing predictions strongly toward positive (finding expected). This directional insight informed the weighting used in the Audit Health Score.
 
 ### Figures
 
