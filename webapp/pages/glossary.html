@@ -348,12 +348,15 @@
       { term: "Management Response", cat: "Outcomes", def: "The audited entity’s official reply to audit findings and recommendations.", why: "Shows if the agency agrees to fix the issue." },
       { term: "Corrective Action Plan", cat: "Outcomes", def: "A documented plan describing how and when an agency will address audit findings.", why: "Shows commitment to solving the problem." },
       { term: "Implementation Status", cat: "Outcomes", def: "Information indicating whether corrective actions are complete, in progress, or not started.", why: "Tracks if promises are being kept." },
-
+      { term: "Resolved Recommendation", cat: "Outcomes", def: "A recommendation for which management has agreed on corrective action.", why: "Shows progress is being made." },
+      { term: "Unresolved Recommendation", cat: "Outcomes", def: "A recommendation that remains disputed or unaddressed.", why: "Highlights ongoing disagreements or neglect." },
+      { term: "Accountability", cat: "Outcomes", def: "The obligation of agencies to explain, justify, and take responsibility for their actions and use of public funds.", why: "The core principle of democracy." },
+      
       { term: "GAO", cat: "Oversight", def: "Government Accountability Office. The supreme audit institution of the federal government, serving Congress.", why: "The 'congressional watchdog' for tax dollars." },
       { term: "OIG", cat: "Oversight", def: "Office of Inspector General. Independent oversight offices within federal agencies.", why: "Polices fraud and waste from the inside." },
       { term: "Yellow Book", cat: "Standards", def: "Generally Accepted Government Auditing Standards (GAGAS) issued by the GAO.", why: "The gold standard for government audits." },
       { term: "Uniform Guidance", cat: "Standards", def: "2 CFR 200. The authoritative set of rules for federal grants and audits.", why: "The rulebook for spending federal money." },
-      { term: "Single Audit", cat: "Oversight", def: "An audit required for non-federal entities that expend $750,000 or more in federal awards in a fiscal year.", why: "The main oversight tool for grant recipients." },
+      { term: "Single Audit", cat: "Oversight", def: "A comprehensive annual audit required for non-federal entities that expend $750,000 or more in federal awards, governed by 2 CFR 200 Subpart F.", why: "The main oversight tool for grant recipients." },
 
       { term: "Obligation", cat: "Finance", def: "A binding commitment by the government to spend money (e.g., contract awards or grants).", why: "Tracks legal commitments, not just cash flow." },
       { term: "Outlay", cat: "Finance", def: "Actual payments made to satisfy obligations.", why: "Real cash leaving the treasury." },
@@ -380,9 +383,20 @@
       { term: "Data Reliability", cat: "Data", def: "The degree to which data are accurate, complete, and appropriate for their intended use.", why: "Ensures decisions are based on facts." },
       { term: "Limitations", cat: "Data", def: "Constraints identified by auditors that affect how much reliance can be placed on findings or data.", why: "Contextualizes the findings." },
 
-      { term: "Resolved Recommendation", cat: "Outcomes", def: "A recommendation for which management has agreed on corrective action.", why: "Shows progress is being made." },
-      { term: "Unresolved Recommendation", cat: "Outcomes", def: "A recommendation that remains disputed or unaddressed.", why: "Highlights ongoing disagreements or neglect." },
-      { term: "Accountability", cat: "Outcomes", def: "The obligation of agencies to explain, justify, and take responsibility for their actions and use of public funds.", why: "The core principle of democracy." }
+      /* --- NEW TERMS ADDED BELOW --- */
+      { term: "Federal Award", cat: "Grants", def: "A grant, loan, cooperative agreement, or other form of federal financial assistance provided to a recipient entity.", why: "The foundation of federal funding." },
+      { term: "Assistance Listing", cat: "Data", def: "A numbered catalog entry identifying each federal assistance program (formerly CFDA), used to track spending across agencies.", why: "Key to tracking specific funding streams." },
+      { term: "Cooperative Agreement", cat: "Grants", def: "A type of federal award similar to a grant, but with substantial federal agency involvement in the project.", why: "Distinguishes partnership from simple funding." },
+      { term: "Pass-Through Entity", cat: "Entities", def: "An organization that receives federal funds and distributes them to subrecipients, such as a state agency passing grants to local nonprofits.", why: "Crucial for tracing funds through state levels." },
+      { term: "Subrecipient", cat: "Entities", def: "An entity that receives federal funds through a pass-through entity rather than directly from a federal agency.", why: "Where much of the actual work happens." },
+      { term: "Major Program", cat: "Audit", def: "A federal program identified for detailed testing during a single audit, selected based on dollar size, risk, and prior audit findings.", why: "Focuses audit resources on high-risk areas." },
+      { term: "Type A / Type B Program", cat: "Audit", def: "A classification system in single audits that determines which federal programs are tested based on dollar thresholds and risk.", why: "Determines audit testing strategy." },
+      { term: "Unique Entity Identifier (UEI)", cat: "Data", def: "A 12-character alphanumeric code assigned through SAM.gov that identifies entities across all federal award systems.", why: "The universal ID for federal contractors." },
+      { term: "Exclusion (Debarment/Suspension)", cat: "Risk", def: "A government action that prohibits an entity or individual from receiving federal awards due to misconduct or performance failures.", why: "Prevents bad actors from getting more money." },
+      { term: "SAM.gov Registration", cat: "Compliance", def: "The required federal enrollment for any entity seeking to receive federal awards, contracts, or assistance.", why: "The gateway to doing business with the government." },
+      { term: "Entity Status", cat: "Compliance", def: "An indicator in SAM.gov showing whether an organization's registration is active, expired, or excluded from receiving federal funds.", why: "Quick check on an organization's standing." },
+      { term: "Corrective Action", cat: "Outcomes", def: "A specific step taken by an entity to fix a problem identified in an audit, such as updating policies, improving controls, or returning misspent funds.", why: "The actual fix for the problem." },
+      { term: "Recipient", cat: "Entities", def: "Any entity (state, local government, nonprofit, university, etc.) that receives federal financial assistance and is subject to audit and reporting requirements.", why: "The primary legal entity responsible for funds." }
     ];
 
     let activeCategory = "All";

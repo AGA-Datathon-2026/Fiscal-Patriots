@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patriot Bot | Fiscal Patriots</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#0b0b0c;
+      --muted:#71717a;
+      --bg:#ffffff;
+      --site-font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      
+      --pill-bg:#0b0b0c;
+      --pill-fg:#ffffff;
+      --pill-hover:0.92;
+      
+      --accent:#3b3fe0;
+      --decoration-purple: #9d65c9;
+
+      /* Chat specific vars */
+      --chat-window-bg: #ffffff;
+      --chat-bg-gradient: linear-gradient(180deg, #fdfbf7 0%, #ffffff 100%);
+      
+      --user-msg-bg: #0b0b0c;
+      --user-msg-text: #ffffff;
+      
+      --bot-msg-bg: #f4f4f5;
+      --bot-msg-text: #0b0b0c;
+      
+      --input-border: rgba(0,0,0,0.1);
+      --shadow-soft: 0 12px 40px rgba(0,0,0,0.08);
+      --shadow-crisp: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    html{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:var(--site-font);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a{color:inherit;text-decoration:none}
+    a:hover{opacity:.85}
+    button{font-family:inherit}
+
+    /* ---------- Header ---------- */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 56px; 
+      position: sticky;  
+      top: 0;
+      z-index: 950;      
+      background: rgba(255,255,255,0.85); 
+      backdrop-filter: blur(16px);       
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .brand{
+      font-size:28px;
+      font-weight:600;
+      letter-spacing:-0.02em;
+    }
+    .topnav{
+      display:flex;
+      gap:44px;
+      font-size:18px;
+      font-weight:500;
+    }
+    
+    .pillBtn{
+      background:var(--pill-bg);
+      color:var(--pill-fg);
+      border:0;
+      border-radius:999px;
+      padding:12px 24px;
+      font-size:16px;
+      font-weight:650;
+      cursor:pointer;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      transition: all 0.2s;
+    }
+    .pillBtn:hover{opacity:var(--pill-hover); transform: translateY(-1px);}
+
+    /* ---------- Main Layout ---------- */
+    .page-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at 50% 0%, #f7f7fa 0%, #ffffff 70%); /* Subtle depth */
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 900px;
+      width: 100%;
+      margin: 60px auto 60px; /* Increased top margin for bubble room */
+      padding: 0 20px;
+      height: calc(100vh - 200px); 
+      min-height: 600px;
+      position: relative;
+    }
+
+    /* ---------- Chat Window ---------- */
+    .chat-window {
+      background: var(--chat-window-bg);
+      border-radius: 32px;
+      border: 1px solid rgba(0,0,0,0.06);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .chat-header {
+      padding: 24px 32px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .bot-avatar-container {
+      position: relative;
+    }
+
+    .bot-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent) 0%, #2a2db8 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(59, 63, 224, 0.25);
+    }
+    
+    .online-indicator {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 14px;
+      height: 14px;
+      background: #10b981; /* Green */
+      border: 2px solid #fff;
+      border-radius: 50%;
+    }
+
+    .chat-title h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .chat-title p {
+      margin: 2px 0 0;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Messages Area */
+    .messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      scroll-behavior: smooth;
+      background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+      background-size: 32px 32px; /* Very subtle dot pattern */
+      background-color: #ffffff;
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 16px 24px;
+      border-radius: 20px;
+      font-size: 17px;
+      line-height: 1.6;
+      position: relative;
+      animation: messageSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    @keyframes messageSlideIn {
+      from { opacity: 0; transform: translateY(15px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .message.bot {
+      align-self: flex-start;
+      background: var(--bot-msg-bg);
+      color: var(--bot-msg-text);
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: var(--user-msg-bg);
+      color: var(--user-msg-text);
+      border-bottom-right-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* deeper shadow for user bubble */
+    }
+
+    /* Links inside messages */
+    .message a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid rgba(59, 63, 224, 0.3);
+      transition: border-color 0.2s;
+    }
+    .message a:hover {
+      border-color: var(--accent);
+    }
+
+    /* Typing Indicator */
+    .typing-indicator {
+      align-self: flex-start;
+      background: var(--bot-msg-bg);
+      padding: 16px 24px;
+      border-radius: 20px;
+      border-bottom-left-radius: 4px;
+      display: none; 
+      gap: 6px;
+      align-items: center;
+      width: fit-content;
+    }
+    
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #a1a1aa;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+    .dot:nth-child(1) { animation-delay: -0.32s; }
+    .dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    /* Input & Suggestions Area */
+    .chat-controls {
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding: 20px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    /* Suggestions */
+    .suggestions {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none; 
+      padding-bottom: 4px;
+      mask-image: linear-gradient(to right, black 95%, transparent 100%); /* Fade out edges */
+    }
+    .suggestions::-webkit-scrollbar { display: none; } 
+
+    .suggestion-chip {
+      padding: 10px 18px;
+      background: #ffffff;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+      border: 1px solid rgba(0,0,0,0.12);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .suggestion-chip:hover {
+      border-color: var(--accent);
+      background: #fcfcfc;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+      color: var(--accent);
+    }
+
+    /* Input Bar */
+    .input-wrapper {
+      display: flex;
+      gap: 12px;
+      position: relative;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 16px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--input-border);
+      font-family: inherit;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #f9f9fa;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+    }
+    .chat-input:focus {
+      border-color: var(--accent);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(59, 63, 224, 0.1);
+    }
+
+    .send-btn {
+      width: 56px;
+      height: 56px;
+      background: var(--ink);
+      color: #fff;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .send-btn:hover { transform: scale(1.05); }
+    .send-btn:active { transform: scale(0.95); }
+    .send-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; margin-left: -2px; }
+
+    /* Hand-drawn decoration (Positioned nicely) */
+    .chat-decoration {
+      position: absolute;
+      top: -55px; /* Shifted up to clear */
+      right: 0;    /* Aligned inside container edge */
+      transform: rotate(4deg);
+      pointer-events: none;
+      z-index: 5;
+    }
+    .chat-handwriting {
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: 28px;
+      color: var(--ink);
+      background: #fff;
+      padding: 4px 12px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: relative;
+      display: block;
+      margin-bottom: 5px;
+    }
+    /* Small triangle for speech bubble effect */
+    .chat-handwriting::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 20px;
+      width: 0; 
+      height: 0; 
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid #fff;
+    }
+
+    .chat-arrow {
+      position: absolute;
+      top: 30px;
+      left: -10px;
+      width: 50px;
+      height: 50px;
+      color: var(--decoration-purple);
+      transform: rotate(80deg) scaleY(-1);
+    }
+    .chat-arrow path { stroke: currentColor; stroke-width: 2; stroke-linecap: round; fill: none; }
+
+    @media (max-width: 900px){
+      .chat-container { height: calc(100vh - 160px); margin-bottom: 20px; }
+    }
+    
+    @media (max-width: 768px){
+      .topbar { padding: 18px; }
+      .topnav { display: none; }
+      .chat-container { margin: 20px auto; height: calc(100vh - 110px); padding: 0 16px; }
+      .chat-decoration { display: none; }
+      .chat-header { padding: 16px 20px; }
+      .messages-area { padding: 20px; }
+      .chat-controls { padding: 16px 20px 20px; }
+      .suggestion-chip { font-size: 13px; padding: 8px 14px; }
+      .send-btn { width: 48px; height: 48px; }
+      .chat-input { padding: 12px 20px; font-size: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="topbar">
+    <a href="landing_page.html" class="brand">fiscal patriots</a>
+
+    <nav class="topnav" aria-label="primary">
+      <a href="landing_page.html">Explore Data</a>
+      <a href="landing_page.html#datasets">Datasets</a>
+      <a href="next_steps.html">What's next?</a>
+      <a href="case_studies.html">Case Studies</a>
+      <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026">GitHub</a>
+      <a href="https://gmufiscalpatriots.bytechisel.com/about_the_team.html">About The Team</a>
+    </nav>
+
+    <a href="landing_page.html" class="pillBtn">Back to Home</a>
+  </header>
+
+  <div class="page-wrapper">
+    <!-- Chat Interface -->
+    <main class="chat-container">
+      
+      <!-- Decoration -->
+      <div class="chat-decoration">
+        <span class="chat-handwriting">Ask me anything!</span>
+        <svg class="chat-arrow" viewBox="0 0 100 100">
+          <path d="M10,80 Q 40,20 90,40" />
+          <path d="M90,40 l -10,5 M 90,40 l -2,10" /> 
+        </svg>
+      </div>
+
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="bot-avatar-container">
+            <div class="bot-avatar">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="10" rx="2" />
+                <circle cx="12" cy="5" r="2" />
+                <path d="M12 7v4" />
+                <line x1="8" y1="16" x2="8" y2="16" />
+                <line x1="16" y1="16" x2="16" y2="16" />
+              </svg>
+            </div>
+            <div class="online-indicator" title="Online"></div>
+          </div>
+          <div class="chat-title">
+            <h2>Patriot Bot</h2>
+            <p>AI Assistant for AuditsMadeSimple</p>
+          </div>
+        </div>
+
+        <div class="messages-area" id="messagesArea">
+          <!-- Initial Welcome Message -->
+          <div class="message bot">
+            Hi there! I'm Patriot Bot. 👋<br><br>
+            I can help you understand our <strong>Audit Health Score</strong>, explain where our data comes from (like <strong>USAspending</strong> or <strong>FAC</strong>), or tell you about our <strong>ML model</strong>.<br><br>
+            What would you like to know?
+          </div>
+        </div>
+
+        <!-- Typing Indicator (Hidden by default) -->
+        <div class="typing-indicator" id="typingIndicator">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
+        <!-- Input & Controls -->
+        <div class="chat-controls">
+          <div class="suggestions">
+            <button class="suggestion-chip" onclick="sendMessage('What is the Audit Health Score?')">What is the Audit Health Score?</button>
+            <button class="suggestion-chip" onclick="sendMessage('How does the ML model work?')">How does the ML model work?</button>
+            <button class="suggestion-chip" onclick="sendMessage('Where does the data come from?')">Where does the data come from?</button>
+            <button class="suggestion-chip" onclick="sendMessage('Who is on the team?')">Who is on the team?</button>
+          </div>
+
+          <div class="input-wrapper">
+            <input type="text" id="userInput" class="chat-input" placeholder="Type your question here..." autocomplete="off">
+            <button class="send-btn" id="sendBtn" aria-label="Send message">
+              <svg viewBox="0 0 24 24">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    const messagesArea = document.getElementById('messagesArea');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    // --- Knowledge Base (Mock AI Logic) ---
+    const KNOWLEDGE_BASE = [
+      {
+        keywords: ['audit', 'health', 'score', 'risk', 'points', 'red', 'green', 'yellow', 'tier', 'rating'],
+        response: "The <strong>Audit Health Score</strong> is a 0-100 metric we created to summarize oversight risk. <br><br>It uses a points system: serious issues like 'Material Weaknesses' or 'Repeat Findings' add risk points. <br><br>• <strong>Green (80-100):</strong> Low risk signals.<br>• <strong>Yellow (60-79):</strong> Medium risk signals.<br>• <strong>Red (0-59):</strong> High risk signals.<br><br>You can try the simulator in our <a href='audit_health_score_casestudy.html'>Case Study</a>."
+      },
+      {
+        keywords: ['machine', 'learning', 'ml', 'model', 'predict', 'future', 'accuracy', 'auc', 'gradient', 'boosting'],
+        response: "We built a <strong>HistGradientBoosting</strong> machine learning model to predict next-year audit findings. <br><br>It analyzes award complexity and prior history to forecast future risks. It achieved an <strong>ROC-AUC of 0.77</strong>, making it a strong 'early warning' system for oversight teams.<br><br>Check out the details in the <a href='ml_model_casestudy.html'>ML Case Study</a>."
+      },
+      {
+        keywords: ['data', 'source', 'usaspending', 'fac', 'sam', 'where', 'come', 'from', 'dataset'],
+        response: "We aggregate data from three official federal sources:<br><br>1. <strong>USAspending.gov:</strong> For obligation and award amounts.<br>2. <strong>FAC.gov:</strong> For Single Audit reports and findings.<br>3. <strong>SAM.gov:</strong> For entity registration and exclusion status.<br><br>We connect them using the Unique Entity Identifier (UEI)."
+      },
+      {
+        keywords: ['team', 'who', 'made', 'created', 'members', 'khaled', 'pranavi', 'mariam', 'nikita', 'andy'],
+        response: "The Fiscal Patriots team is:<br><br>• <strong>Khaled Alkurd:</strong> Team Lead<br>• <strong>Pranavi Doodala:</strong> Project Manager<br>• <strong>Mariam Debas:</strong> Visualization Lead<br>• <strong>Nikita Chandrasing:</strong> Product Manager<br>• <strong>Andy Yaro:</strong> Product Developer<br><br>Read more on the <a href='https://gmufiscalpatriots.bytechisel.com/about_the_team.html'>About the Team</a> page."
+      },
+      {
+        keywords: ['finding', 'material', 'weakness', 'significant', 'deficiency', 'questioned', 'cost'],
+        response: "These are specific audit terms:<br><br>• <strong>Material Weakness:</strong> A severe problem in internal controls.<br>• <strong>Significant Deficiency:</strong> Important, but less severe than a material weakness.<br>• <strong>Questioned Cost:</strong> Money the auditor thinks was misspent or undocumented.<br><br>Visit our <a href='glossary.html'>Glossary</a> for full definitions."
+      },
+      {
+        keywords: ['next', 'steps', 'do', 'checklist', 'what', 'now'],
+        response: "Not sure where to start? Check our <a href='next_steps.html'>Next Steps</a> page. <br><br>You can explore specific datasets, try guided questions in Tableau, or brush up on terminology in the Glossary."
+      },
+      {
+        keywords: ['hello', 'hi', 'hey', 'greetings'],
+        response: "Hello! Ready to explore government data? Ask me about the Audit Health Score or our Data Sources."
+      },
+      {
+        keywords: ['thank', 'thanks', 'cool', 'good', 'bye'],
+        response: "You're welcome! Let me know if you have other questions about federal spending or audits."
+      }
+    ];
+
+    function getBestResponse(query) {
+      const q = query.toLowerCase();
+      let bestMatch = null;
+      let maxScore = 0;
+
+      KNOWLEDGE_BASE.forEach(entry => {
+        let score = 0;
+        entry.keywords.forEach(word => {
+          if (q.includes(word)) score++;
+        });
+
+        if (score > maxScore) {
+          maxScore = score;
+          bestMatch = entry;
+        }
+      });
+
+      if (maxScore > 0 && bestMatch) {
+        return bestMatch.response;
+      } else {
+        return "I'm not sure about that specific detail. <br><br>Try asking about the <strong>Audit Health Score</strong>, <strong>Data Sources</strong>, or check our <a href='glossary.html'>Glossary</a> for definitions.";
+      }
+    }
+
+    // --- UI Logic ---
+
+    function appendMessage(text, type) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `message ${type}`;
+      msgDiv.innerHTML = text;
+      
+      // We append the message BEFORE the typing indicator if it exists inside messageArea?
+      // No, usually chat apps keep typing indicator at very bottom. 
+      // Simplified: Just append.
+      messagesArea.appendChild(msgDiv);
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function showTyping() {
+      // Move indicator to bottom and show
+      messagesArea.appendChild(typingIndicator); 
+      typingIndicator.style.display = 'flex';
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function hideTyping() {
+      typingIndicator.style.display = 'none';
+    }
+
+    async function sendMessage(textOverride) {
+      const text = textOverride || userInput.value.trim();
+      if (!text) return;
+
+      // 1. Add User Message
+      appendMessage(text, 'user');
+      userInput.value = '';
+
+      // 2. Show Typing Indicator
+      showTyping();
+
+      // 3. Simulate Network Delay
+      const delay = Math.floor(Math.random() * 800) + 600;
+      await new Promise(r => setTimeout(r, delay));
+
+      // 4. Get Response & Show
+      hideTyping();
+      const responseText = getBestResponse(text);
+      appendMessage(responseText, 'bot');
+    }
+
+    sendBtn.addEventListener('click', () => sendMessage());
+
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>

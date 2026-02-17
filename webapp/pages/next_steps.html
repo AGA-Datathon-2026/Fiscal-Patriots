@@ -32,10 +32,12 @@
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
-
+    
+    /* Fixed sticky behavior by allowing body to grow */
+    html{height:100%}
     body{
       margin:0;
+      min-height:100%;
       background:var(--bg);
       color:var(--ink);
       font-family:var(--site-font);
@@ -52,7 +54,14 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:22px 56px;
+      padding:18px 56px; /* Matched to landing_page.html */
+      position: sticky;  /* Sticky menu */
+      top: 0;
+      z-index: 950;      /* Ensure it stays above everything */
+      background: rgba(255,255,255,0.85); /* Glass effect */
+      backdrop-filter: blur(16px);       
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
     }
     .brand{
       font-size:28px;
@@ -614,7 +623,7 @@
 
           <div class="step-actions" role="tablist" aria-label="Guided questions">
             <button class="pillBtn ghost question-btn active" type="button" onclick="loadViz('agencies')" role="tab" aria-selected="true">
-              “Which agencies spend the most ?”
+              “Which agencies spend the most?”
             </button>
             <button class="pillBtn ghost question-btn" type="button" onclick="loadViz('time')" role="tab" aria-selected="false">
               “Which year had the most federal funding (FY2019–FY2024)?”

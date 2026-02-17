@@ -281,6 +281,11 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
+    /* Disabled chips for clones - keep pointer events none but REMOVED visual dimming */
+    .chip.disabled {
+      pointer-events: none;
+    }
+
     .tipContainer {
       position: relative;
       max-width: 980px;
@@ -337,6 +342,16 @@
       border-radius:8px;
       background:#fff;
       min-height: 500px;
+    }
+    
+    .cloneImg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      flex-grow: 1;
+      border-radius: 8px;
+      min-height: 500px;
+      display: block;
     }
 
     .vizFrame .tableauPlaceholder{width:100% !important; height: 100% !important; min-height: 500px;}
@@ -505,11 +520,23 @@
       color: var(--pill-fg);
       text-decoration: none;
       font-weight: 800;
-      transition: transform .12s ease, opacity .12s ease;
+      transition: all .15s ease;
+      flex-shrink: 0;
     }
 
-    .dsArrow:hover{ opacity: var(--pill-hover); }
+    .dsArrow:hover{ opacity: var(--pill-hover); transform: translateY(-1px); }
     .dsArrow:active{ transform: translateY(1px); }
+
+    /* New Secondary Button Style for Official Links */
+    .dsArrow.secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .dsArrow.secondary:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
 
     .dsCardLink{
       color: rgba(255,255,255,.92);
@@ -518,6 +545,16 @@
     }
 
     .dsCardLink:hover{ text-decoration: underline; }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
 
     /* ---------- Guide Widget (Roaming Mode) ---------- */
     .guide-widget {
@@ -685,7 +722,7 @@
 
 <body>
   <header class="topbar">
-    <div class="brand">fiscal patriots</div>
+    <a href="https://gmufiscalpatriots.bytechisel.com/" class="brand">fiscal patriots</a>
 
     <nav class="topnav" aria-label="primary">
       <a href="landing_page.html">Explore Data</a>
@@ -728,9 +765,25 @@
             <h2 class="slideTitle">Risk + Funding Context</h2>
           </div>
           <div class="slideText">
-            <p><strong>What you are seeing:</strong> Audit findings combined with spending.</p>
+            <p><strong>What you are seeing:</strong> Audit findings combined with spending. Puts risk signals in proportion to federal dollars.</p>
           </div>
-          <div class="vizFrame"><div class="vizPlaceholder">Clone</div></div>
+          <div class="chipRow">
+            <button class="chip active disabled" tabindex="-1">Findings per $1M</button>
+            <button class="chip disabled" tabindex="-1">Top recipients</button>
+            <button class="chip disabled" tabindex="-1">By entity type</button>
+          </div>
+          <div class="tipContainer">
+            <svg class="tipArrow" viewBox="0 0 100 100">
+               <path d="M10,80 Q 40,20 90,40" stroke="currentColor" fill="none" />
+               <path d="M90,40 l -10,5 M 90,40 l -2,10" stroke="currentColor" fill="none" /> 
+            </svg>
+            <div class="tipLine">Drill into recipients to see who has the most findings.</div>
+          </div>
+          <div class="vizFrame">
+            <!-- Static image of D for visual continuity -->
+            <img class="cloneImg" src="https://public.tableau.com/static/images/Ma/Map-FindingsPerMillionbyState/Map-FindingsPerMillionbyState/1.png" alt="Static preview" />
+          </div>
+          <div class="slideNote">Note: Findings density is a signal, not proof of misuse.</div>
         </article>
 
         <!-- A (Funding by State) -->
@@ -868,9 +921,25 @@
             <h2 class="slideTitle">Funding by State</h2>
           </div>
           <div class="slideText">
-            <p><strong>What you are seeing:</strong> Total obligation amounts aggregated by recipient state.</p>
+            <p><strong>What you are seeing:</strong> Total obligation amounts aggregated by recipient state. This helps spot geographic concentration.</p>
           </div>
-          <div class="vizFrame"><div class="vizPlaceholder">Clone</div></div>
+          <div class="chipRow">
+            <button class="chip active disabled" tabindex="-1">Top 10 States (50.9%)</button>
+            <button class="chip disabled" tabindex="-1">Grant spending map</button>
+            <button class="chip disabled" tabindex="-1">Top 10 Agencies</button>
+          </div>
+          <div class="tipContainer">
+            <svg class="tipArrow" viewBox="0 0 100 100">
+               <path d="M10,80 Q 40,20 90,40" stroke="currentColor" fill="none" />
+               <path d="M90,40 l -10,5 M 90,40 l -2,10" stroke="currentColor" fill="none" /> 
+            </svg>
+            <div class="tipLine">Wow! Look how concentrated spending is in the top 10 states.</div>
+          </div>
+          <div class="vizFrame">
+            <!-- Static image of A for visual continuity -->
+            <img class="cloneImg" src="https://public.tableau.com/static/images/Ba/Bar-Top10StatesReceive50_9ofAllFederalGrants/Bar-Top10StatesReceive50_9ofAllFederalGrants/1.png" alt="Static preview" />
+          </div>
+          <div class="slideNote">Note: High spending does not imply inefficiency.</div>
         </article>
 
       </div>
@@ -908,47 +977,95 @@
 
       <div class="dsCards">
 
+        <!-- USAspending Card -->
         <div class="dsCard dsCard--usaspending">
           <div class="dsCardContent">
             <h3>USAspending.gov</h3>
             <p>This is the official open data source for federal spending information, answering who received the money, how much was obligated, and which agency funded it. It does not show whether the money was used effectively.</p>
             <div class="dsCardFooter">
-              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/USAspending" class="dsArrow" aria-label="Go to USAspending dataset">
+              <!-- GitHub Button -->
+              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/USAspending" class="dsArrow" aria-label="Go to USAspending dataset on GitHub">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/USAspending" class="dsCardLink">View Dataset</a>
+              
+              <!-- Official Site Button (New) -->
+              <a href="https://www.usaspending.gov/" class="dsArrow secondary" aria-label="Visit USAspending.gov" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </a>
+
+              <div style="margin-left: 4px;">
+                <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/USAspending" class="dsCardLink">GitHub</a>
+                <span style="color:rgba(255,255,255,0.4); margin:0 4px;">/</span>
+                <a href="https://www.usaspending.gov/" class="dsCardLink" target="_blank">Official Site</a>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- FAC Card -->
         <div class="dsCard dsCard--fac">
           <div class="dsCardContent">
             <h3>FAC.gov</h3>
             <p>This is the central repository for Single Audit reports filed by recipients of federal funds, useful for checking recent findings, material weaknesses, and the auditor’s opinion. It does not provide real-time daily spending.</p>
             <div class="dsCardFooter">
-              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/FAC" class="dsArrow" aria-label="Go to FAC dataset">
+              <!-- GitHub Button -->
+              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/FAC" class="dsArrow" aria-label="Go to FAC dataset on GitHub">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/FAC" class="dsCardLink">View Dataset</a>
+
+              <!-- Official Site Button (New) -->
+              <a href="https://fac.gov/" class="dsArrow secondary" aria-label="Visit FAC.gov" target="_blank">
+                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </a>
+
+              <div style="margin-left: 4px;">
+                <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/FAC" class="dsCardLink">GitHub</a>
+                <span style="color:rgba(255,255,255,0.4); margin:0 4px;">/</span>
+                <a href="https://fac.gov/" class="dsCardLink" target="_blank">Official Site</a>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- SAM Card -->
         <div class="dsCard dsCard--sam">
           <div class="dsCardContent">
             <h3>SAM.gov</h3>
             <p>This is the primary database for entity registration and debarments (exclusions), helping you check if an entity is debarred, its UEI (Unique Entity Identifier, a government-wide identifier for entities), and whether registration is active. It does not provide transaction history.</p>
             <div class="dsCardFooter">
-              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/SAM" class="dsArrow" aria-label="Go to SAM dataset">
+              <!-- GitHub Button -->
+              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/SAM" class="dsArrow" aria-label="Go to SAM dataset on GitHub">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/SAM" class="dsCardLink">View Dataset</a>
+
+              <!-- Official Site Button (New) -->
+              <a href="https://sam.gov/" class="dsArrow secondary" aria-label="Visit SAM.gov" target="_blank">
+                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </a>
+
+              <div style="margin-left: 4px;">
+                <a href="https://github.com/fiscalpatriots/AGA_Datathon_2026/tree/archive/onedrive-snapshot/archive/onedrive/AGA_Datathon_OneDrive/Datasets/SAM" class="dsCardLink">GitHub</a>
+                <span style="color:rgba(255,255,255,0.4); margin:0 4px;">/</span>
+                <a href="https://sam.gov/" class="dsCardLink" target="_blank">Official Site</a>
+              </div>
             </div>
           </div>
         </div>
@@ -956,6 +1073,10 @@
       </div>
     </div>
   </section>
+
+  <footer class="site-footer">
+    &copy; 2026 Fiscal Patriots Team
+  </footer>
 
   <!-- Welcome/Guide Widget -->
   <div id="guideWidget" class="guide-widget">
@@ -1141,15 +1262,25 @@
     const nextBtns = document.querySelectorAll('.nextBtn');
     const slideNumSpans = document.querySelectorAll('.slideNum');
     const slides = Array.from(viewport.querySelectorAll('.exploreSlide'));
+    const slideCount = slides.length;
     let activeIndex = 1;
 
+    // Helper to update the UI (numbers) without forcing a scroll
+    function updateSlideUI(index) {
+        // Map clone indices to real numbers for display
+        const currentSlide = slides[index];
+        slideNumSpans.forEach(span => { span.textContent = currentSlide.dataset.slide; });
+    }
+
     function centerSlide(index, behavior){
+      if (index < 0 || index >= slideCount) return;
       const el = slides[index];
       const left = el.offsetLeft - (viewport.clientWidth - el.clientWidth) / 2;
       viewport.scrollTo({ left, behavior });
       activeIndex = index;
-      slideNumSpans.forEach(span => { span.textContent = el.dataset.slide; });
+      updateSlideUI(index);
     }
+    
     function nearestIndex(){
       const center = viewport.scrollLeft + viewport.clientWidth / 2;
       let best = 0, bestDist = Infinity;
@@ -1160,17 +1291,86 @@
       });
       return best;
     }
+
+    // Initialize
     window.addEventListener('load', () => centerSlide(1, 'auto'));
-    prevBtns.forEach(btn => btn.addEventListener('click', () => centerSlide(activeIndex - 1, 'smooth')));
-    nextBtns.forEach(btn => btn.addEventListener('click', () => centerSlide(activeIndex + 1, 'smooth')));
+    
+    // Navigation buttons - Improved Loop Logic
+    prevBtns.forEach(btn => btn.addEventListener('click', () => {
+        if (activeIndex <= 1) {
+            // At Real First (1) or Clone Last (0)
+            if (activeIndex === 1) {
+                // Scroll to Clone Last (0)
+                centerSlide(0, 'smooth');
+            } else if (activeIndex === 0) {
+                 // Force reset instantly to Real Last (slideCount - 2)
+                 const realLast = slides[slideCount - 2];
+                 const left = realLast.offsetLeft - (viewport.clientWidth - realLast.clientWidth) / 2;
+                 viewport.scrollTo({ left, behavior: 'auto' });
+                 activeIndex = slideCount - 2;
+                 updateSlideUI(activeIndex);
+                 // Then animate to Real Second-to-Last (slideCount - 3)
+                 requestAnimationFrame(() => {
+                     centerSlide(activeIndex - 1, 'smooth');
+                 });
+            }
+        } else {
+            centerSlide(activeIndex - 1, 'smooth');
+        }
+    }));
+    
+    nextBtns.forEach(btn => btn.addEventListener('click', () => {
+        if (activeIndex >= slideCount - 2) {
+             // At Real Last (slideCount - 2) or Clone First (slideCount - 1)
+             if (activeIndex === slideCount - 2) {
+                 // Scroll to Clone First (slideCount - 1)
+                 centerSlide(slideCount - 1, 'smooth');
+             } else if (activeIndex === slideCount - 1) {
+                 // Force reset instantly to Real First (1)
+                 const realFirst = slides[1];
+                 const left = realFirst.offsetLeft - (viewport.clientWidth - realFirst.clientWidth) / 2;
+                 viewport.scrollTo({ left, behavior: 'auto' });
+                 activeIndex = 1;
+                 updateSlideUI(activeIndex);
+                 // Then animate to Real Second (2)
+                 requestAnimationFrame(() => {
+                     centerSlide(2, 'smooth');
+                 });
+             }
+        } else {
+            centerSlide(activeIndex + 1, 'smooth');
+        }
+    }));
+
+    // Scroll Listener
     viewport.addEventListener('scroll', () => {
+      const idx = nearestIndex();
+      
+      // Live update of UI number while scrolling
+      if (idx !== activeIndex) {
+          activeIndex = idx;
+          updateSlideUI(idx);
+      }
+      
       clearTimeout(window.scrollTimer);
       window.scrollTimer = setTimeout(() => {
-        const idx = nearestIndex();
-        centerSlide(idx, 'auto');
-        if (idx === 0) centerSlide(4, 'auto');
-        else if (idx === slides.length - 1) centerSlide(1, 'auto');
-      }, 120);
+        // Only intervene if we are at the clone edges
+        if (idx === 0) {
+            // At Clone D (left edge) -> Jump to Real D
+            const realD = slides[slides.length - 2]; 
+            const left = realD.offsetLeft - (viewport.clientWidth - realD.clientWidth) / 2;
+            viewport.scrollTo({ left, behavior: 'auto' });
+            activeIndex = slides.length - 2;
+            updateSlideUI(activeIndex);
+        } else if (idx === slides.length - 1) {
+            // At Clone A (right edge) -> Jump to Real A
+            const realA = slides[1];
+            const left = realA.offsetLeft - (viewport.clientWidth - realA.clientWidth) / 2;
+            viewport.scrollTo({ left, behavior: 'auto' });
+            activeIndex = 1;
+            updateSlideUI(activeIndex);
+        }
+      }, 40); // Shorter timeout (40ms) for snappier infinite loop reset
     });
 
     /* ---------- Glossary & Roaming Guide Widget Logic ---------- */
