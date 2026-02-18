@@ -214,10 +214,9 @@ We used permutation feature importance and SHAP (SHapley Additive Explanations) 
 SHAP analysis confirmed that prior findings are the dominant predictor, with high feature values pushing predictions strongly toward positive (finding expected). This directional insight informed the weighting used in the Audit Health Score.
 
 ### Figures
-
-![Figure 1: Model performance](<models/predictive_audit_findings/screenshots/figure 1.png>)
-
-![Figure 2: Feature importance](<models/predictive_audit_findings/screenshots/figure 2.png>)
+![Figure 1: Feature importance](<models/predictive_audit_findings/screenshots/figure_2_roc_auc_feature_importance.png>)
+![Figure 2: Model performance](<models/predictive_audit_findings/screenshots/figure 1.png>)
+![Figure 3: SHAP beeswarm](<models/predictive_audit_findings/screenshots/figure 2.png>)
 
 ## How to Explore the Project
 
