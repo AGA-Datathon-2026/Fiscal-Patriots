@@ -207,9 +207,9 @@ Full case study: https://gmufiscalpatriots.bytechisel.com/ml_model_casestudy.htm
 ### What the model learned
 We used permutation feature importance and SHAP (SHapley Additive Explanations) to keep results explainable. Top signals included:
 - prior findings indicators (whether findings happened, and how many)
-- award structure and complexity (direct award lines, major award lines)
-- breadth across agencies and programs (distinct agencies, distinct programs)
-- concentration signals (max program total)
+- total federal expenditures
+- breadth across agencies (distinct agencies)
+- award structure (direct award lines)
 
 SHAP analysis confirmed that prior findings are the dominant predictor, with high feature values pushing predictions strongly toward positive (finding expected). This directional insight informed the weighting used in the Audit Health Score.
 
